@@ -1,19 +1,45 @@
 ﻿namespace ReverseString
 {
+
     public class Program
     {
         public static void Main()
         {
-            string input = "Hello, World!";
-            string reversed = "";
+            string input = "A man, a plan, a canal, Panama!";
+            bool isPalindrome = IsValidPalindrome(input);
+            Console.WriteLine(isPalindrome ? "The string is a palindrome." : "The string is not a palindrome.");
+        }
 
-            for (int i = input.Length -1 ; i >= 0; i--)
+        public static bool IsValidPalindrome(string s)
+        {
+            int left = 0, right = s.Length - 1;
+
+            while (left < right)
             {
-                reversed += input[i];
+                // Skip non-alphanumeric characters from the left
+                while (left < right && !Char.IsLetterOrDigit(s[left]))
+                {
+                    left++;
+                }
+
+                // Skip non-alphanumeric characters from the right
+                while (left < right && !Char.IsLetterOrDigit(s[right]))
+                {
+                    right--;
+                }
+
+                if (Char.ToLower(s[left]) != Char.ToLower(s[right]))
+                {
+                    return false;
+                }
+
+                left++;
+                right--;
             }
 
-            Console.WriteLine(reversed);
+            return true;
         }
     }
 
 }
+
